@@ -3,6 +3,7 @@
 #include <sstream>
 #include <vector>
 #include <string>
+#include <map>
 
 using namespace std;
 
@@ -34,19 +35,53 @@ void read_file(vector<vector<string>> &data, string line){
 
 }
 
+void recommend(vector<vector<string>> data, map <string, float>&ans){   
+
+    for(int i=1;i<=3;i++){    
+        float sum=0,count=0;
+
+        for(int j=i;j<data.size();j+=3){
+
+            sum+=std::stof(data[j][2]);   
+            if(std::stof(data[j][2])>0){
+                count++;
+            }   
+        }    
+        ans[data[i][1]]=sum/count;
+
+    }
+    
+
+}
+
 int main() {   
 
     string line;
     vector<vector<string>> data;
+    map <string ,float> ans;
 
     read_file(data, line);
 
-   for(int i=0;i<data.size();i++){
+    recommend(data, ans); 
+
+
+   /*for(int i=0;i<data.size();i++){
     for(int j=0;j<data[i].size();j++){
         cout<<data[i][j]<<" ";
     }
     cout<<endl;
-   }
+   }*/
+
+      
+   cout<<"Recommended Movies:"<<endl; 
+   vector<string> keys;
+
+   for (const auto& pair : ans) {
+        keys.push_back(pair.first);
+    }
+    for(int i=keys.size()-1;i>=0;i--){
+        cout<<keys[i]<<endl;
+    }
     
 
     return 0;
