@@ -4,25 +4,25 @@
 #include <vector>
 #include <string>
 
-int main() {
+using namespace std;
+
+void read_file(vector<vector<string>> &data, string line){   
     // Open the CSV file
-    std::ifstream file("movie_ratings.csv");
+
+    ifstream file("movie_ratings.csv");
     if (!file.is_open()) {
-        std::cerr << "Error: Unable to open file!" << std::endl;
-        return 1;
+        cerr << "Error: Unable to open file!" << endl;
+        return;
     }
-
-    std::string line;
-    std::vector<std::vector<std::string>> data;
-
     // Read the CSV file line by line
-    while (std::getline(file, line)) {
-        std::stringstream ss(line);
-        std::string cell;
-        std::vector<std::string> row;
+
+     while (getline(file, line)) {
+        stringstream ss(line);
+        string cell;
+        vector<string> row;
 
         // Split the line into cells using a comma as the delimiter
-        while (std::getline(ss, cell, ',')) {
+        while (getline(ss, cell, ',')) {
             row.push_back(cell);
         }
 
@@ -32,13 +32,28 @@ int main() {
 
     file.close();
 
+}
+
+int main() {
+    
+    
+
+    string line;
+    vector<vector<string>> data;
+
+    read_file(data, line);
+
+    
+   
+
     /* Display the data*/
     for (const auto& row : data) {
         for (const auto& cell : row) {
-            std::cout << cell << " ";
+            cout << cell << " ";
         }
-        std::cout << std::endl;
+        cout << endl;
     }
+    
 
     return 0;
 }
