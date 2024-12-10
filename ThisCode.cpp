@@ -34,25 +34,19 @@ void read_file(vector<vector<string>> &data, string line){
 
 }
 
-int main() {
-    
-    
+int main() {   
 
     string line;
     vector<vector<string>> data;
 
     read_file(data, line);
 
-    
-   
-
-    /* Display the data*/
-    for (const auto& row : data) {
-        for (const auto& cell : row) {
-            cout << cell << " ";
-        }
-        cout << endl;
+   for(int i=0;i<data.size();i++){
+    for(int j=0;j<data[i].size();j++){
+        cout<<data[i][j]<<" ";
     }
+    cout<<endl;
+   }
     
 
     return 0;

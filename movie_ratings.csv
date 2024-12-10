@@ -1,10 +1,10 @@
 User,Movie,Rating
 Alice,Inception,4.5
 Alice,Avatar,4.0
-Alice,The Dark Knight,5.0
+Alice,The Dark Knight,0
 Bob,Inception,4.0
 Bob,Avatar,4.5
 Bob,The Dark Knight,4.0
-Charlie,Inception,5.0
+Charlie,Inception,0
 Charlie,Avatar,3.5
 Charlie,The Dark Knight,4.5
