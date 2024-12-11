@@ -36,6 +36,7 @@ void read_file(vector<vector<string>> &data, string line){
 }
 
 void recommend(vector<vector<string>> data, map <string, float>&ans){   
+    //Calculate average recommendation of every movie
 
     for(int i=1;i<=3;i++){    
         float sum=0,count=0;
@@ -75,10 +76,14 @@ int main() {
       
    cout<<"Recommended Movies:"<<endl; 
    vector<string> keys;
-
+   //Copy movie names based on recommendation to vector ans
+   
    for (const auto& pair : ans) {
         keys.push_back(pair.first);
     }
+
+    //Display recommended movie names
+
     for(int i=keys.size()-1;i>=0;i--){
         cout<<keys[i]<<endl;
     }
