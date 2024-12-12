@@ -50,33 +50,26 @@ void read_file(vector<vector<string>> &data, string line, vector<string>& users,
 }
 
 
-void similarities(vector<vector<string>> data, map<string, float>&avg_rating){    
+void similarities(vector<vector<string>> data, map<string, float>&avg_rating, vector<string> users){    
 
     float count=0,sum=0;    
-    int change=1;
 
-    for(int i=1;i<data.size();i++){   
-        sum+=stof(data[i][2]);  
+    for(int i=0;i<users.size();i++){   
 
-        if(stof(data[i][2])>0){
-            count++;
+        string temp=users[i]; 
+
+        for(int j=1;j<data.size();j++){
+            if(data[j][1]==temp){
+                sum+=stof(data[j][2]); 
+
+                if(stof(data[j][2])>0){   
+                    count++;
+                }   
+            }
         }   
-        change++;
-
-        if(change>3){  
-            avg_rating[data[i][0]]=(sum/count);
-            sum=0;
-            count=0;
-        }
+        avg_rating[temp]=sum/count;
     }    
-
-    for(int i=0;i<3;i++){
-        for(int j=i+1;j<3;j++){
-
-            if(avg_rating[])
-        }
-    }
-    
+    return ;   
 
 }
 
@@ -107,7 +100,7 @@ int main() {
 
     string line;
     vector<vector<string>> data;
-    vector<float> avg_rating;
+    map<string, float> avg_rating;
     map <string ,float> ratings;
     vector<string> users; 
     vector<string> movies;
@@ -117,13 +110,28 @@ int main() {
 
        
     //Calculate similarities between users
-    similarities(data, avg_rating);
+    similarities(data, avg_rating, users);
 
     //Recoomend Movies
-    recommend(data, ratings); 
+    recommend(data, ratings, movies); 
+
+    bool found=true;
+
+    for(int i=0;i<users.size();i++){
+        for(int j=i+1;j<users.size();j++){
+            if(avg_rating[users[i]]==avg_rating[users[j]] || avg_rating[users[i]]==avg_rating[users[j]]+1 || avg_rating[users[i]]+1==avg_rating[users[j]]){
+
+                cout<<"User "<<users[i]<<" and user "<<users[j]<<" have similarities in movie rating\n \n";
+                found=false;
+            }
+        }
+    }
+    if(found){
+        cout<<"No two users have given similar ratings to movies, hence no two users have similarities"<<endl;
+    }
 
       
-   cout<<"Recommended Movies:"<<endl; 
+   cout<<"\nRecommended Movies:"<<endl; 
    vector<string> keys;
    //Copy movie names based on recommendation to vector ans
    
@@ -137,6 +145,5 @@ int main() {
         cout<<keys[i]<<endl;
     }
     
-
     return 0;
 }
